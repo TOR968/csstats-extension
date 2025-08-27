@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/TOR968/csstats-extension/compare/v1.0.0...v1.0.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* improve plugin package naming in releases ([05fc0ed](https://github.com/TOR968/csstats-extension/commit/05fc0ed091502b4ec50fb3a9aa27fb1a0c9fed76))
+
 # 1.0.0 (2025-08-27)
 
 
