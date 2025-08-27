@@ -1,3 +1,10 @@
+# 1.0.0 (2025-08-27)
+
+
+### Bug Fixes
+
+* test release ([f73519b](https://github.com/TOR968/csstats-extension/commit/f73519b6aa30b2a3ff19ae28abe30d6bcb9e1163))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
