@@ -38,6 +38,11 @@ jobs:
                   fetch-depth: 0
                   token: ${{ secrets.GITHUB_TOKEN }}
 
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: latest
+
             - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
@@ -45,14 +50,9 @@ jobs:
                   cache: 'pnpm'
 
             - name: Setup Python
-              uses: actions/setup-python@v4
+              uses: actions/setup-python@v5
               with:
                   python-version: '3.x'
-
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              with:
-                  version: latest
 
             - name: Install Node.js dependencies
               run: pnpm install --frozen-lockfile
@@ -70,51 +70,6 @@ jobs:
 
             - name: Build plugin
               run: pnpm run build
-
-            - name: Semantic Release
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: npx semantic-release
-
-    build-and-package:
-        needs: release
-        runs-on: ubuntu-latest
-        if: success()
-
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '18'
-                  cache: 'npm'
-
-            - name: Setup Python
-              uses: actions/setup-python@v4
-              with:
-                  python-version: '3.x'
-
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              with:
-                  version: latest
-
-            - name: Install dependencies
-              run: |
-                  pnpm install --frozen-lockfile
-                  pip install -r requirements.txt
-
-            - name: Build plugin
-              run: pnpm run build
-
-            - name: Get version from package.json
-              id: get_version
-              run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
             - name: Create release package
               run: |
@@ -134,17 +89,16 @@ jobs:
                   cp README.md release/
                   cp LICENSE release/ 2>/dev/null || echo "No LICENSE file"
 
+                  # Get version from package.json for zip name
+                  VERSION=$(node -p "require('./package.json').version")
+
                   # Create zip package
                   cd release
-                  zip -r "../csstats-extension-v${{ steps.get_version.outputs.version }}.zip" .
+                  zip -r "../csstats-extension-v${VERSION}.zip" .
                   cd ..
 
-            - name: Upload Release Asset
-              uses: actions/upload-release-asset@v1
+            - name: Semantic Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  upload_url: ${{ github.event.release.upload_url }}
-                  asset_path: ./csstats-extension-v${{ steps.get_version.outputs.version }}.zip
-                  asset_name: csstats-extension-v${{ steps.get_version.outputs.version }}.zip
-                  asset_content_type: application/zip
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: npx semantic-release
