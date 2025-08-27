@@ -38,7 +38,7 @@ const SettingsContent = () => {
 
 export default definePlugin(() => {
 	console.log('CSStats Extension: Frontend plugin initializing...');
-	
+
 	try {
 		PluginSettings.numberTextInput += 1;
 		console.log('CSStats Extension: Settings updated:', PluginSettings.numberTextInput);
@@ -54,7 +54,7 @@ export default definePlugin(() => {
 
 		Millennium.AddWindowCreateHook(windowCreated);
 		console.log('CSStats Extension: Window create hook registered successfully');
-		
+
 		console.log('CSStats Extension: Frontend plugin initialized successfully');
 	} catch (error) {
 		console.error('CSStats Extension: Error during frontend initialization:', error);

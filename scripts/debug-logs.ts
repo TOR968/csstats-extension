@@ -2,16 +2,21 @@
 
 /**
  * Debug script to test plugin logging functionality
- * Run with: node scripts/debug-logs.js
+ * Run with: npx tsx scripts/debug-logs.ts
  */
 
-import fs from 'fs';
-import path from 'path';
+import { existsSync } from 'fs';
 
-const debugInfo = {
-  timestamp: new Date().toISOString(),
-  message: 'CSStats Extension Debug Test',
-  status: 'running'
+interface DebugInfo {
+	timestamp: string;
+	message: string;
+	status: string;
+}
+
+const debugInfo: DebugInfo = {
+	timestamp: new Date().toISOString(),
+	message: 'CSStats Extension Debug Test',
+	status: 'running',
 };
 
 console.log('🔍 CSStats Extension Debug Information:');
@@ -24,17 +29,17 @@ console.log('');
 console.log('📁 Plugin Structure Check:');
 console.log('==========================');
 
-const checkFiles = [
-  'backend/main.py',
-  'backend/logger.py', 
-  'frontend/index.tsx',
-  'webkit/index.tsx',
-  'plugin.json'
+const checkFiles: string[] = [
+	'backend/main.py', 
+	'backend/logger.py', 
+	'frontend/index.tsx', 
+	'webkit/index.tsx', 
+	'plugin.json'
 ];
 
-checkFiles.forEach(file => {
-  const exists = fs.existsSync(file);
-  console.log(`${exists ? '✅' : '❌'} ${file}`);
+checkFiles.forEach((file: string) => {
+	const exists: boolean = existsSync(file);
+	console.log(`${exists ? '✅' : '❌'} ${file}`);
 });
 
 console.log('');
@@ -44,6 +49,6 @@ console.log('1. Backend logs: Check Millennium console for "CSStats Extension:" 
 console.log('2. Frontend logs: Press F12 in Steam, check Console tab');
 console.log('3. Webkit logs: Press F12 on Steam profile pages, look for "CSStats.gg:" messages');
 console.log('4. Build plugin: npm run build');
-console.log('5. Test package: npm run package');
+console.log('5. Test locally: Copy .millennium/, backend/, static/, plugin.json to Steam plugins/');
 console.log('');
 console.log('Debug complete! 🎯');

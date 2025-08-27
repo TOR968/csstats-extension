@@ -1,6 +1,7 @@
 import Millennium  # pyright: ignore[reportMissingImports]
 from logger import logger
 
+
 class Plugin:
     def _load(self) -> None:
         try:
