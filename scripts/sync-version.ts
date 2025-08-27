@@ -20,7 +20,7 @@ interface PluginJson {
 	[key: string]: any;
 }
 
-function syncVersion(newVersion: string): void {
+function syncVersion(newVersion: string = '1.0.0'): void {
 	if (!newVersion) {
 		console.error('Error: Version argument is required');
 		process.exit(1);
