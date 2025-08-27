@@ -75,16 +75,18 @@ jobs:
               run: |
                   mkdir -p release
 
-                  # Copy essential files
-                  cp -r dist/* release/ 2>/dev/null || echo "No dist directory found"
-                  cp -r frontend release/ 2>/dev/null || echo "No frontend directory"
-                  cp -r webkit release/ 2>/dev/null || echo "No webkit directory"
-                  cp -r backend release/ 2>/dev/null || echo "No backend directory"
-                  cp -r styles release/ 2>/dev/null || echo "No styles directory"
+                  # Copy built JavaScript files
+                  cp -r .millennium release/
+
+                  # Copy backend
+                  cp -r backend release/
+
+                  # Copy styles as static folder (rename styles to static)
+                  cp -r styles release/static
 
                   # Copy configuration files
-                  cp package.json release/
                   cp plugin.json release/
+                  cp metadata.json release/
                   cp requirements.txt release/
                   cp README.md release/
                   cp LICENSE release/ 2>/dev/null || echo "No LICENSE file"

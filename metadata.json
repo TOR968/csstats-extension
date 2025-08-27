@@ -1,0 +1,8 @@
+{
+	"name": "csstats-extension",
+	"author": "TOR968",
+	"description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles.",
+	"version": "1.0.1",
+	"tags": ["statistics", "cs2", "steam", "profile"],
+	"target": "Desktop"
+}
