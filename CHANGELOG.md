@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/TOR968/csstats-extension/compare/v1.1.0...v1.1.1) (2025-08-27)
+
+
+### Bug Fixes
+
+* remove metadata.json from source repository ([38f6265](https://github.com/TOR968/csstats-extension/commit/38f6265d30f2f2954af68f78de40782e791925d9))
+
 # [1.1.0](https://github.com/TOR968/csstats-extension/compare/v1.0.0...v1.1.0) (2025-08-27)
 
 
