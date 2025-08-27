@@ -1,3 +1,16 @@
+# 1.0.0 (2025-08-27)
+
+
+### Bug Fixes
+
+* remove metadata.json from source repository ([38f6265](https://github.com/TOR968/csstats-extension/commit/38f6265d30f2f2954af68f78de40782e791925d9))
+* test release ([f73519b](https://github.com/TOR968/csstats-extension/commit/f73519b6aa30b2a3ff19ae28abe30d6bcb9e1163))
+
+
+### Features
+
+* fix plugin packaging structure for Millennium compatibility ([8c23400](https://github.com/TOR968/csstats-extension/commit/8c2340007ac80921915db73f06489f8c088cf96b))
+
 ## [1.1.1](https://github.com/TOR968/csstats-extension/compare/v1.1.0...v1.1.1) (2025-08-27)
 
 
