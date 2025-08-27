@@ -10,16 +10,16 @@ declare const Millennium: Millennium;
 
 export default async function WebkitMain() {
 	const debugMode = true; // Set to false to disable debug overlay
-	
+
 	let debugContainer: HTMLElement | null = null;
-	
+
 	function createDebugOverlay() {
 		if (!debugMode) return;
-		
+
 		// Remove existing debug container
 		const existing = document.getElementById('csstats-debug');
 		if (existing) existing.remove();
-		
+
 		debugContainer = document.createElement('div');
 		debugContainer.id = 'csstats-debug';
 		debugContainer.style.cssText = `
@@ -41,24 +41,24 @@ export default async function WebkitMain() {
 		`;
 		document.body.appendChild(debugContainer);
 	}
-	
+
 	function addDebugLog(message: string) {
 		const timestamp = new Date().toLocaleTimeString();
 		const logMessage = `[${timestamp}] CSStats: ${message}`;
-		
+
 		console.log(logMessage);
-		
+
 		if (debugContainer && debugMode) {
 			const logElement = document.createElement('div');
 			logElement.textContent = logMessage;
 			logElement.style.marginBottom = '2px';
 			debugContainer.appendChild(logElement);
-			
+
 			// Keep only last 10 logs
 			while (debugContainer.children.length > 10) {
 				debugContainer.removeChild(debugContainer.firstChild!);
 			}
-			
+
 			// Auto scroll to bottom
 			debugContainer.scrollTop = debugContainer.scrollHeight;
 		}

@@ -30,7 +30,7 @@ const SettingsContent = () => {
 	const addLog = (message: string) => {
 		const timestamp = new Date().toLocaleTimeString();
 		const logEntry = `[${timestamp}] ${message}`;
-		setLogs(prev => [...prev.slice(-9), logEntry]); // Keep last 10 logs
+		setLogs((prev) => [...prev.slice(-9), logEntry]); // Keep last 10 logs
 		console.log('CSStats Extension:', message);
 	};
 
@@ -53,32 +53,39 @@ const SettingsContent = () => {
 
 	return (
 		<>
-			<Field label="Plugin Settings" description="CSStats.gg Extension configuration and debugging." icon={<IconsModule.Settings />} bottomSeparator="standard" focusable>
-				<DialogButton
-					onClick={testPlugin}
-					disabled={isLogging}
-				>
+			<Field
+				label="Plugin Settings"
+				description="CSStats.gg Extension configuration and debugging."
+				icon={<IconsModule.Settings />}
+				bottomSeparator="standard"
+				focusable
+			>
+				<DialogButton onClick={testPlugin} disabled={isLogging}>
 					{isLogging ? 'Testing...' : 'Test Plugin'}
 				</DialogButton>
 			</Field>
 
 			<Field label="Debug Logs" description="Real-time plugin logging for debugging." icon={<IconsModule.Console />} bottomSeparator="standard" focusable>
-				<div style={{ 
-					backgroundColor: '#1a1a1a', 
-					color: '#00ff00', 
-					padding: '10px', 
-					borderRadius: '5px', 
-					fontFamily: 'monospace', 
-					fontSize: '12px',
-					maxHeight: '200px',
-					overflowY: 'auto',
-					border: '1px solid #333'
-				}}>
+				<div
+					style={{
+						backgroundColor: '#1a1a1a',
+						color: '#00ff00',
+						padding: '10px',
+						borderRadius: '5px',
+						fontFamily: 'monospace',
+						fontSize: '12px',
+						maxHeight: '200px',
+						overflowY: 'auto',
+						border: '1px solid #333',
+					}}
+				>
 					{logs.length === 0 ? (
 						<div style={{ color: '#666', fontStyle: 'italic' }}>No logs yet...</div>
 					) : (
 						logs.map((log, index) => (
-							<div key={index} style={{ marginBottom: '2px' }}>{log}</div>
+							<div key={index} style={{ marginBottom: '2px' }}>
+								{log}
+							</div>
 						))
 					)}
 				</div>
