@@ -18,7 +18,7 @@ export default {
 		[
 			'@semantic-release/exec',
 			{
-				prepareCmd: 'npx tsx scripts/sync-version.ts ${nextRelease.version}',
+				prepareCmd: 'npx tsx scripts/sync-version.ts ${nextRelease.version} && npm run package',
 			},
 		],
 		[

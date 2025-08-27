@@ -71,33 +71,6 @@ jobs:
             - name: Build plugin
               run: pnpm run build
 
-            - name: Create release package
-              run: |
-                  mkdir -p release
-
-                  # Copy built JavaScript files
-                  cp -r .millennium release/
-
-                  # Copy backend
-                  cp -r backend release/
-
-                  # Copy styles as static folder (rename styles to static)
-                  cp -r styles release/static
-
-                  # Copy configuration files
-                  cp plugin.json release/
-                  cp requirements.txt release/
-                  cp README.md release/
-                  cp LICENSE release/ 2>/dev/null || echo "No LICENSE file"
-
-                  # Get version from package.json for zip name
-                  VERSION=$(node -p "require('./package.json').version")
-
-                  # Create zip package
-                  cd release
-                  zip -r "../csstats-extension-v${VERSION}.zip" .
-                  cd ..
-
             - name: Semantic Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
