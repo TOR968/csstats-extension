@@ -3,5 +3,5 @@
 	"name": "csstats-extension",
 	"common_name": "CSStats.gg Extension",
 	"description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles.",
-	"version": "1.2.0"
+	"version": "0.0.1"
 }
