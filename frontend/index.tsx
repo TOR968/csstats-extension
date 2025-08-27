@@ -1,3 +1,4 @@
+import React from 'react';
 import { Millennium, IconsModule, definePlugin, Field, DialogButton } from '@steambrew/client';
 import { PluginSettings } from './settings';
 
@@ -23,16 +24,69 @@ function windowCreated(context: any) {
 // const backendMethod = callable<[{ message: string; status: boolean; count: number }], boolean>('Backend.receive_frontend_message');
 
 const SettingsContent = () => {
+	const [logs, setLogs] = React.useState<string[]>([]);
+	const [isLogging, setIsLogging] = React.useState(false);
+
+	const addLog = (message: string) => {
+		const timestamp = new Date().toLocaleTimeString();
+		const logEntry = `[${timestamp}] ${message}`;
+		setLogs(prev => [...prev.slice(-9), logEntry]); // Keep last 10 logs
+		console.log('CSStats Extension:', message);
+	};
+
+	React.useEffect(() => {
+		addLog('Settings UI loaded');
+	}, []);
+
+	const testPlugin = () => {
+		setIsLogging(true);
+		addLog('Testing plugin functionality...');
+		addLog(`Current settings: ${JSON.stringify(PluginSettings)}`);
+		addLog('Plugin test completed');
+		setIsLogging(false);
+	};
+
+	const clearLogs = () => {
+		setLogs([]);
+		addLog('Logs cleared');
+	};
+
 	return (
-		<Field label="Plugin Settings" description="This is a description of the plugin settings." icon={<IconsModule.Settings />} bottomSeparator="standard" focusable>
-			<DialogButton
-				onClick={() => {
-					console.log('Button clicked!');
-				}}
-			>
-				Click Me
-			</DialogButton>
-		</Field>
+		<>
+			<Field label="Plugin Settings" description="CSStats.gg Extension configuration and debugging." icon={<IconsModule.Settings />} bottomSeparator="standard" focusable>
+				<DialogButton
+					onClick={testPlugin}
+					disabled={isLogging}
+				>
+					{isLogging ? 'Testing...' : 'Test Plugin'}
+				</DialogButton>
+			</Field>
+
+			<Field label="Debug Logs" description="Real-time plugin logging for debugging." icon={<IconsModule.Console />} bottomSeparator="standard" focusable>
+				<div style={{ 
+					backgroundColor: '#1a1a1a', 
+					color: '#00ff00', 
+					padding: '10px', 
+					borderRadius: '5px', 
+					fontFamily: 'monospace', 
+					fontSize: '12px',
+					maxHeight: '200px',
+					overflowY: 'auto',
+					border: '1px solid #333'
+				}}>
+					{logs.length === 0 ? (
+						<div style={{ color: '#666', fontStyle: 'italic' }}>No logs yet...</div>
+					) : (
+						logs.map((log, index) => (
+							<div key={index} style={{ marginBottom: '2px' }}>{log}</div>
+						))
+					)}
+				</div>
+				<DialogButton onClick={clearLogs} style={{ marginTop: '10px' }}>
+					Clear Logs
+				</DialogButton>
+			</Field>
+		</>
 	);
 };
 

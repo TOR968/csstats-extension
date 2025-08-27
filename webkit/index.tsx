@@ -9,16 +9,73 @@ type Millennium = {
 declare const Millennium: Millennium;
 
 export default async function WebkitMain() {
+	const debugMode = true; // Set to false to disable debug overlay
+	
+	let debugContainer: HTMLElement | null = null;
+	
+	function createDebugOverlay() {
+		if (!debugMode) return;
+		
+		// Remove existing debug container
+		const existing = document.getElementById('csstats-debug');
+		if (existing) existing.remove();
+		
+		debugContainer = document.createElement('div');
+		debugContainer.id = 'csstats-debug';
+		debugContainer.style.cssText = `
+			position: fixed;
+			top: 10px;
+			right: 10px;
+			width: 300px;
+			max-height: 200px;
+			background-color: rgba(0, 0, 0, 0.9);
+			color: #00ff00;
+			font-family: monospace;
+			font-size: 11px;
+			padding: 10px;
+			border-radius: 5px;
+			border: 1px solid #333;
+			overflow-y: auto;
+			z-index: 999999;
+			pointer-events: none;
+		`;
+		document.body.appendChild(debugContainer);
+	}
+	
+	function addDebugLog(message: string) {
+		const timestamp = new Date().toLocaleTimeString();
+		const logMessage = `[${timestamp}] CSStats: ${message}`;
+		
+		console.log(logMessage);
+		
+		if (debugContainer && debugMode) {
+			const logElement = document.createElement('div');
+			logElement.textContent = logMessage;
+			logElement.style.marginBottom = '2px';
+			debugContainer.appendChild(logElement);
+			
+			// Keep only last 10 logs
+			while (debugContainer.children.length > 10) {
+				debugContainer.removeChild(debugContainer.firstChild!);
+			}
+			
+			// Auto scroll to bottom
+			debugContainer.scrollTop = debugContainer.scrollHeight;
+		}
+	}
+
 	try {
-		console.log('CSStats.gg webkit module loading...');
+		createDebugOverlay();
+		addDebugLog('CSStats.gg webkit module loading...');
 
 		// Check if Millennium API is available
 		if (typeof Millennium === 'undefined') {
-			console.error('CSStats.gg: Millennium API not available in webkit context');
+			addDebugLog('ERROR: Millennium API not available in webkit context');
 			return;
 		}
 
-		console.log('CSStats.gg webkit module loaded successfully.');
+		addDebugLog('Millennium API available, proceeding...');
+		addDebugLog('Current URL: ' + window.location.href);
 
 		const styles = `
         .csstats-btn {
@@ -45,19 +102,19 @@ export default async function WebkitMain() {
 		const styleSheet = document.createElement('style');
 		styleSheet.innerText = styles;
 		document.head.appendChild(styleSheet);
-		console.log('CSStats.gg: Styles injected successfully');
+		addDebugLog('Styles injected successfully');
 
 		const rightCol = await Millennium.findElement(document, '.profile_rightcol');
-		console.log(`CSStats.gg: Found ${rightCol.length} profile_rightcol elements`);
+		addDebugLog(`Found ${rightCol.length} profile_rightcol elements`);
 
 		if (rightCol.length > 0) {
 			const parser = new DOMParser();
 			const profileUrl = `${window.location.href}/?xml=1`;
-			console.log(`CSStats.gg: Fetching profile data from ${profileUrl}`);
+			addDebugLog(`Fetching profile data from ${profileUrl}`);
 
 			const profileResponse = await fetch(profileUrl);
 			if (!profileResponse.ok) {
-				console.error(`CSStats.gg: Failed to fetch profile data: ${profileResponse.status} ${profileResponse.statusText}`);
+				addDebugLog(`ERROR: Failed to fetch profile data: ${profileResponse.status} ${profileResponse.statusText}`);
 				return;
 			}
 
@@ -65,10 +122,10 @@ export default async function WebkitMain() {
 			const profileXmlDoc = parser.parseFromString(profileXmlText, 'application/xml');
 
 			const steamID64 = profileXmlDoc.querySelector('steamID64')?.textContent || '0';
-			console.log(`CSStats.gg: Extracted SteamID64: ${steamID64}`);
+			addDebugLog(`Extracted SteamID64: ${steamID64}`);
 
 			if (!steamID64 || steamID64 === '0') {
-				console.error('CSStats.gg: Could not parse steamID64 from URL.');
+				addDebugLog('ERROR: Could not parse steamID64 from URL');
 				return;
 			}
 
@@ -79,17 +136,22 @@ export default async function WebkitMain() {
 			button.className = 'csstats-btn';
 			button.innerHTML = '🎯 CSStats.gg';
 			button.onclick = () => {
+				addDebugLog(`Opening CSStats for SteamID: ${steamID64}`);
 				window.open(`https://csstats.gg/player/${steamID64}`, '_self', 'noopener,noreferrer');
 			};
 
 			statsContainer.appendChild(button);
 			rightCol[0].insertBefore(statsContainer, rightCol[0].children[1]);
-			console.log('CSStats.gg: Button successfully added to profile');
+			addDebugLog('Button successfully added to profile');
 		} else {
-			console.error('CSStats.gg: Parent container ".profile_rightcol" not found');
+			addDebugLog('ERROR: Parent container ".profile_rightcol" not found');
 		}
 	} catch (error) {
+		const errorMessage = error instanceof Error ? error.message : String(error);
+		addDebugLog(`FATAL ERROR: ${errorMessage}`);
+		if (error instanceof Error && error.stack) {
+			addDebugLog(`Stack trace: ${error.stack}`);
+		}
 		console.error('CSStats.gg: Error in WebkitMain:', error);
-		console.error('CSStats.gg: Stack trace:', error.stack);
 	}
 }
