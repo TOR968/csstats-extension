@@ -86,7 +86,6 @@ jobs:
 
                   # Copy configuration files
                   cp plugin.json release/
-                  cp metadata.json release/
                   cp requirements.txt release/
                   cp README.md release/
                   cp LICENSE release/ 2>/dev/null || echo "No LICENSE file"
