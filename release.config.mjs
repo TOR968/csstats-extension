@@ -27,7 +27,7 @@ export default {
 				assets: [
 					{
 						path: 'csstats-extension-*.zip',
-						label: 'Plugin Package (${nextRelease.gitTag})',
+						label: 'CSStats Extension Plugin (${nextRelease.gitTag})',
 					},
 				],
 			},
