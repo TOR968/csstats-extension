@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/TOR968/csstats-extension/compare/v1.1.0...v1.2.0) (2025-08-27)
+
+
+### Features
+
+* implement comprehensive logging system ([eda4a97](https://github.com/TOR968/csstats-extension/commit/eda4a9756fc7775555899d250d632a496d43ed8d))
+
 # [1.1.0](https://github.com/TOR968/csstats-extension/compare/v1.0.1...v1.1.0) (2025-08-27)
 
 
