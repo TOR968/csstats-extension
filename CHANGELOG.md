@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/TOR968/csstats-extension/compare/v1.0.1...v1.1.0) (2025-08-27)
+
+
+### Features
+
+* implement proper plugin packaging system ([df89291](https://github.com/TOR968/csstats-extension/commit/df89291815d5c5556ccc07b633fcae59a475a8cd))
+
 ## [1.0.1](https://github.com/TOR968/csstats-extension/compare/v1.0.0...v1.0.1) (2025-08-27)
 
 
