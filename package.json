@@ -28,7 +28,7 @@
   },
   "type": "module",
   "name": "csstats-extension",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles",
   "main": "./frontend/index.tsx",
   "author": "CSStats Extension Team",
