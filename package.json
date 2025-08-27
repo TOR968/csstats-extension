@@ -3,6 +3,7 @@
     "dev": "millennium-ttc --build dev",
     "build": "millennium-ttc --build prod",
     "package": "npm run build && node scripts/create-package.js",
+    "debug": "node scripts/debug-logs.js",
     "sync-version": "npx tsx scripts/sync-version.ts 1.0.0",
     "build-plugin": "npx tsx scripts/build-plugin.ts",
     "release": "npx tsx scripts/release.ts patch"

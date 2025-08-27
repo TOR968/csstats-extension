@@ -15,7 +15,8 @@ function windowCreated(context: any) {
 	// window create event.
 	// you can interact directly with the document and monitor it with dom observers
 	// you can then render components in specific pages.
-	console.log(context);
+	console.log('CSStats Extension: Window created event triggered:', context);
+	console.log('CSStats Extension: Current URL:', window.location.href);
 }
 
 // Declare a function that exists on the backend
@@ -36,22 +37,31 @@ const SettingsContent = () => {
 };
 
 export default definePlugin(() => {
-	PluginSettings.numberTextInput += 1;
-	console.log(PluginSettings.numberTextInput);
+	console.log('CSStats Extension: Frontend plugin initializing...');
+	
+	try {
+		PluginSettings.numberTextInput += 1;
+		console.log('CSStats Extension: Settings updated:', PluginSettings.numberTextInput);
 
-	// Call the backend method
-	// backendMethod({
-	// 	message: 'Hello World From Frontend!',
-	// 	status: true,
-	// 	count: 69,
-	// }).then((message) => {
-	// 	console.log('Result from callServerMethod:', message);
-	// });
+		// Call the backend method
+		// backendMethod({
+		// 	message: 'Hello World From Frontend!',
+		// 	status: true,
+		// 	count: 69,
+		// }).then((message) => {
+		// 	console.log('Result from callServerMethod:', message);
+		// });
 
-	Millennium.AddWindowCreateHook(windowCreated);
+		Millennium.AddWindowCreateHook(windowCreated);
+		console.log('CSStats Extension: Window create hook registered successfully');
+		
+		console.log('CSStats Extension: Frontend plugin initialized successfully');
+	} catch (error) {
+		console.error('CSStats Extension: Error during frontend initialization:', error);
+	}
 
 	return {
-		title: 'My Plugin',
+		title: 'CSStats Extension',
 		icon: <IconsModule.Settings />,
 		content: <SettingsContent />,
 	};
