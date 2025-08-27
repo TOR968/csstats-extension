@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/TOR968/csstats-extension/compare/v1.0.0...v1.1.0) (2025-08-27)
+
+
+### Features
+
+* fix plugin packaging structure for Millennium compatibility ([8c23400](https://github.com/TOR968/csstats-extension/commit/8c2340007ac80921915db73f06489f8c088cf96b))
+
 # 1.0.0 (2025-08-27)
 
 
