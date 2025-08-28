@@ -2,16 +2,6 @@ name: Create Release
 
 on:
     workflow_dispatch:
-        inputs:
-        release_type:
-            description: 'Release type (patch, minor, major)'
-            required: true
-            default: 'patch'
-            type: choice
-            options:
-                - patch
-                - minor
-                - major
 
 permissions:
     contents: write
@@ -31,7 +21,7 @@ jobs:
             - name: Setup Python
               uses: actions/setup-python@v5
               with:
-                  python-version: '3.x'
+                  python-version: '3.12'
 
             - name: Install pnpm
               uses: pnpm/action-setup@v2
@@ -46,7 +36,7 @@ jobs:
 
             - name: Install dependencies
               run: |
-                  pnpm install --frozen-lockfile
+                  pnpm install --no-frozen-lockfile
                   pip install -r requirements.txt
 
             - name: Run Semantic Release
