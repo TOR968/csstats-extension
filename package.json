@@ -3,7 +3,7 @@
     "dev": "millennium-ttc --build dev",
     "build": "millennium-ttc --build prod",
     "debug": "npx tsx scripts/debug-logs.ts",
-    "sync-version": "npx tsx scripts/sync-version.ts 1.0.0"
+    "sync-version": "npx tsx scripts/sync-version.ts 1.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.3",
@@ -28,7 +28,7 @@
   },
   "type": "module",
   "name": "csstats-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles",
   "main": "./frontend/index.tsx",
   "author": "CSStats Extension Team",
