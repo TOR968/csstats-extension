@@ -22,6 +22,7 @@ Before installing this plugin, ensure you have:
 ### Example
 
 ![Example](./example.png)
+![ExampleGif](./example.gif)
 
 ---
 
