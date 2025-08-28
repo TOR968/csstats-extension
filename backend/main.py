@@ -12,6 +12,13 @@ class Plugin:
             logger.error(f"CSStats Extension: Failed to load plugin: {str(e)}")
             raise
 
+    def _front_end_loaded(self) -> None:
+        try:
+            logger.info("CSStats Extension: Frontend loaded successfully")
+            # Add any frontend-specific initialization logic here if needed
+        except Exception as e:
+            logger.error(f"CSStats Extension: Error during frontend load: {str(e)}")
+
     def _unload(self) -> None:
         try:
             logger.info("CSStats Extension: Plugin unloading...")
