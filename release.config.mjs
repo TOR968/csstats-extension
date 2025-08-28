@@ -10,16 +10,10 @@ export default {
 			},
 		],
 		[
-			'@semantic-release/npm',
-			{
-				npmPublish: false,
-			},
-		],
-		[
 			'@semantic-release/exec',
 			{
-				prepareCmd:
-					'npx tsx scripts/sync-version.ts ${nextRelease.version} && npm run build && mkdir -p release && cp -r .millennium release/ && cp -r backend release/ && cp -r styles release/static && cp plugin.json release/ && cp requirements.txt release/ && cp README.md release/ && cp LICENSE release/ && cd release && zip -r ../csstats-extension-v${nextRelease.version}.zip . && cd .. && rm -rf release',
+				prepareCmd: 'npx tsx scripts/sync-version.ts ${nextRelease.version}',
+				publishCmd: 'npm run build && npx tsx scripts/build-plugin.ts ${nextRelease.version}',
 			},
 		],
 		[

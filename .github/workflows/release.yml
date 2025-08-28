@@ -1,78 +1,55 @@
-name: Release
+name: Create Release
 
 on:
-    push:
-        branches:
-            - main
-            - master
-        paths-ignore:
-            - 'README.md'
-            - 'docs/**'
-            - '.gitignore'
-            - 'LICENSE'
     workflow_dispatch:
         inputs:
-            release_type:
-                description: 'Release type (patch, minor, major)'
-                required: true
-                default: 'patch'
-                type: choice
-                options:
-                    - patch
-                    - minor
-                    - major
+        release_type:
+            description: 'Release type (patch, minor, major)'
+            required: true
+            default: 'patch'
+            type: choice
+            options:
+                - patch
+                - minor
+                - major
+
+permissions:
+    contents: write
+    issues: write
+    pull-requests: write
 
 jobs:
-    release:
+    build:
         runs-on: ubuntu-latest
-
-        permissions:
-            contents: write
-            issues: write
-            pull-requests: write
 
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
               with:
-                  fetch-depth: 0
                   token: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              with:
-                  version: latest
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '22'
-                  cache: 'pnpm'
 
             - name: Setup Python
               uses: actions/setup-python@v5
               with:
                   python-version: '3.x'
 
-            - name: Install Node.js dependencies
-              run: pnpm install --frozen-lockfile
+            - name: Install pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: latest
 
-            - name: Install Python dependencies
-              run: pip install -r requirements.txt
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+                  cache: 'pnpm'
 
-            - name: Run tests (if available)
+            - name: Install dependencies
               run: |
-                  if [ -f "package.json" ] && grep -q '"test"' package.json; then
-                    pnpm test
-                  else
-                    echo "No tests found, skipping..."
-                  fi
+                  pnpm install --frozen-lockfile
+                  pip install -r requirements.txt
 
-            - name: Build plugin
-              run: pnpm run build
-
-            - name: Semantic Release
+            - name: Run Semantic Release
+              run: npx semantic-release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: npx semantic-release
