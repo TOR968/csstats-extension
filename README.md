@@ -32,7 +32,7 @@ Before installing this plugin, ensure you have:
 1. **Download the latest release**
 
     - Go to the [Releases page](https://github.com/TOR968/csstats-extension/releases)
-    - Download the `CSStats Extension Plugin.zip` file
+    - Download the CSStats Extension Plugin `csstats-extension.zip` file
 
 2. **Extract the plugin**
 
