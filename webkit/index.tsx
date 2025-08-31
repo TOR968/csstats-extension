@@ -21,26 +21,43 @@ export default async function WebkitMain() {
 		console.log('CSStats.gg webkit module loaded successfully.');
 
 		const styles = `
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:slnt,wght@11,800&display=swap');
+
         .csstats-btn {
-            background-color: #1a1a1a;
-            border-radius: 5px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            color: #ffffff;
-            font-family: 'Motiva Sans', sans-serif;
-            font-size: 15px;
             display: flex;
+            width: 100%;
+            height: 3rem;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            font-size: 20px;
+            color: #FFF;
+            font-weight: 800;
+            font-family: 'Cairo', sans-serif;
+            font-variation-settings: "slnt" -11;
+            transition: all 0.5s cubic-bezier(.23, 1, .32, 1);
+            text-transform: uppercase;
+            background-color: #1a1a1a;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            outline: none;
         }
 
         .csstats-btn:hover {
             background-color: #2d3748;
-            border-color: #4a5568;
+            text-decoration: none !important;
         }
-    `;
+
+        .csstats-btn:hover .stats {
+            color: #EB4B4B;
+        }
+
+        .csstats-btn .stats {
+            transition: all 0.5s cubic-bezier(.23, 1, .32, 1);
+            color: #3872FC;
+            display: inline-block;
+        }`;
 
 		const styleSheet = document.createElement('style');
 		styleSheet.innerText = styles;
@@ -77,7 +94,7 @@ export default async function WebkitMain() {
 
 			const button = document.createElement('div');
 			button.className = 'csstats-btn';
-			button.innerHTML = '🎯 CSStats.gg';
+			button.innerHTML = 'CS<span class="stats">stats</span>.gg';
 			button.onclick = () => {
 				window.open(`https://csstats.gg/player/${steamID64}`, '_self', 'noopener,noreferrer');
 			};
