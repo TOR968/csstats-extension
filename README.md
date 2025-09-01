@@ -6,18 +6,7 @@ A Millennium plugin that integrates CSStats.gg data and functionality directly i
 
 Before installing this plugin, ensure you have:
 
-### Required Software
-
--   **Steam Client** (Windows/macOS/Linux)
 -   **[Millennium](https://steambrew.app/)** installed and configured
--   **Node.js** (version 16 or higher) with **pnpm** package manager
--   **Python 3.7+** with pip
-
-### System Requirements
-
--   Steam must be installed in a standard location
--   Sufficient permissions to modify Steam plugin directory
--   Internet connection for downloading dependencies and CSStats.gg data
 
 ### Example
 
@@ -28,31 +17,20 @@ Before installing this plugin, ensure you have:
 
 ## 🚀 Installation Guide
 
-### Method 1: Pre-built Release (Recommended)
+### Method 1: Millennium Plugin Installer (Recommended)
 
-1. **Download the latest release**
+1. **Copy Plugin ID**
 
-    - Go to the [Releases page](https://github.com/TOR968/csstats-extension/releases)
-    - Download the CSStats Extension Plugin `csstats-extension.zip` file
+    Copy the following Plugin ID
 
-2. **Extract the plugin**
+2. **Install via Millennium**
 
-    ```bash
-    # Windows
-    # Extract to: C:\Program Files (x86)\Steam\plugins\csstats-extension
-
-    # Linux
-    # Extract to: ~/.local/share/millennium/plugins/csstats-extension
-
-    # macOS
-    # Extract to: ~/Library/Application Support/millennium/plugins/csstats-extension
-    ```
-
-3. **Enable the plugin**
-    - Restart Steam completely (close from system tray)
-    - Open Steam and go to **Millennium** → **Plugins**
-    - Find "CSStats.gg Extension" and enable it
-    - Restart Steam again
+    - Open Steam with Millennium installed
+    - Go to **Millennium** → **Plugins**
+    - Click on the **Install a plugin**
+    - Paste the Plugin ID into the installer
+    - Click **Install**
+    - Restart Steam when prompted
 
 ### Method 2: Build from Source
 
@@ -131,18 +109,6 @@ ln -s "$(pwd)" ~/.local/share/millennium/plugins/csstats-extension
 3. Go to **Millennium** → **Plugins**
 4. Enable "CSStats.gg Extension"
 5. Restart Steam once more
-
----
-
-## 📖 Release
-
-For detailed release instructions, see [RELEASE.md](RELEASE.md).
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
