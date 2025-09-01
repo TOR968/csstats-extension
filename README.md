@@ -21,14 +21,14 @@ Before installing this plugin, ensure you have:
 
 1. **Copy Plugin ID**
 
-    Copy the following Plugin ID
+    Copy the following [Plugin ID](https://steambrew.app/plugin?id=5a3b3a83840f)
 
 2. **Install via Millennium**
 
     - Open Steam with Millennium installed
     - Go to **Millennium** → **Plugins**
     - Click on the **Install a plugin**
-    - Paste the Plugin ID into the installer
+    - Paste the [Plugin ID](https://steambrew.app/plugin?id=5a3b3a83840f) into the installer
     - Click **Install**
     - Restart Steam when prompted
 
