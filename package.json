@@ -3,36 +3,36 @@
     "dev": "millennium-ttc --build dev",
     "watch": "nodemon --watch webkit --watch frontend --ext ts,tsx,js,jsx --exec \"millennium-ttc --build dev\"",
     "build": "millennium-ttc --build prod",
-    "sync-version": "npx tsx scripts/sync-version.ts 1.0.0",
-    "release": "npx tsx scripts/build-plugin.ts 1.0.0"
+    "sync-version": "npx tsx scripts/sync-version.ts 1.0.1",
+    "release": "npx tsx scripts/build-plugin.ts 1.0.1"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^11.1.0",
-    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.1.0",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^9.2.6",
-    "@semantic-release/release-notes-generator": "^12.1.0",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.8",
-    "@types/node": "^20.11.0",
-    "archiver": "^6.0.0",
-    "nodemon": "^3.1.9",
-    "semantic-release": "^22.0.12",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.0"
+    "@semantic-release/github": "^12.0.6",
+    "@semantic-release/release-notes-generator": "^14.1.0",
+    "@types/node": "^25.3.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "archiver": "^7.0.1",
+    "nodemon": "^3.1.14",
+    "semantic-release": "^25.0.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   },
   "type": "module",
   "name": "csstats-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles",
   "main": "./frontend/index.tsx",
   "author": "CSStats Extension Team",
   "license": "MIT",
   "dependencies": {
-    "@steambrew/api": "^5.5.3",
-    "@steambrew/client": "^5.5.3",
-    "@steambrew/ttc": "^2.7.3",
-    "@steambrew/webkit": "^5.5.3"
+    "@steambrew/api": "^5.8.4",
+    "@steambrew/client": "^5.8.4",
+    "@steambrew/ttc": "^3.2.3",
+    "@steambrew/webkit": "^5.8.4"
   }
 }

@@ -35,7 +35,6 @@ async function buildPlugin() {
 			{ src: '.millennium', dest: '.millennium' },
 			{ src: 'backend', dest: 'backend' },
 			{ src: 'plugin.json', dest: 'plugin.json' },
-			{ src: 'requirements.txt', dest: 'requirements.txt' },
 			{ src: 'README.md', dest: 'README.md' },
 		];
 
