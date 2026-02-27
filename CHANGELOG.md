@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/TOR968/csstats-extension/compare/v1.0.0...v1.0.1) (2026-02-27)
+
+
+### Bug Fixes
+
+* rerun build ([d04d13e](https://github.com/TOR968/csstats-extension/commit/d04d13ec25b1a723eeb7a586553531bbb8ff5865))
+
 # 1.0.0 (2025-08-31)
 
 
