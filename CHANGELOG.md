@@ -10,6 +10,13 @@
 
 ### Bug Fixes
 
+* rebuild ([80da195](https://github.com/TOR968/csstats-extension/commit/80da19543cc3ab994418ce33bb2512181b6cea79))
+
+## [1.1.1](https://github.com/TOR968/csstats-extension/compare/v1.1.0...v1.1.1) (2026-06-20)
+
+
+### Bug Fixes
+
 * rename webkit entry to .ts ([4586ed6](https://github.com/TOR968/csstats-extension/commit/4586ed60d7075af5574fd40b55de841993622585))
 * webkit-primary injection with CDP fallback, injection-mode + browser settings ([9a9bbbe](https://github.com/TOR968/csstats-extension/commit/9a9bbbe43f6c5aa6e4523344af1c79f4319b8b4e))
 
