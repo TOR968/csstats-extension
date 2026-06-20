@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/TOR968/csstats-extension/compare/v1.0.1...v1.1.0) (2026-06-20)
+
+
+### Features
+
+* migrate to bun + CDP injection for community browser ([7174cbe](https://github.com/TOR968/csstats-extension/commit/7174cbe898c0d89c874a51ac5dc10c3126c520d2))
+
 ## [1.0.1](https://github.com/TOR968/csstats-extension/compare/v1.0.0...v1.0.1) (2026-02-27)
 
 
