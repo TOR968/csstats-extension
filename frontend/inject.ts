@@ -1,4 +1,4 @@
-function csstatsInjectMain() {
+export function csstatsInjectMain(openExternal: boolean, injector?: string) {
 	if (document.querySelector('.csstats-extension-container')) return;
 	if (!/steamcommunity\.com\/(id|profiles)\//.test(location.href)) return;
 
@@ -12,7 +12,7 @@ function csstatsInjectMain() {
 		}
 		const miniId = document.querySelector('[data-miniprofile]')?.getAttribute('data-miniprofile');
 		if (miniId && miniId !== '0') {
-			try { return (STEAMID64_BASE + BigInt(miniId)).toString(); } catch { /* ignore */ }
+			try { return (STEAMID64_BASE + BigInt(miniId)).toString(); } catch { }
 		}
 		try {
 			const xmlUrl = location.href.replace(/[?#].*/, '').replace(/\/$/, '') + '/?xml=1';
@@ -21,15 +21,21 @@ function csstatsInjectMain() {
 			const dom = new DOMParser().parseFromString(text, 'application/xml');
 			const id = dom.querySelector('steamID64')?.textContent;
 			if (id && id !== '0') return id;
-		} catch { /* ignore */ }
+		} catch { }
 		return null;
 	}
 
 	async function inject() {
 		const col = document.querySelector('.profile_rightcol');
 		if (!col || col.querySelector('.csstats-extension-container')) return;
+
+		const div = document.createElement('div');
+		div.className = 'account-row csstats-extension-container';
+		div.setAttribute('data-injector', injector || 'unknown');
+		col.insertBefore(div, col.children[1] ?? null);
+
 		const steamId = await getSteamId();
-		if (!steamId) { console.warn('[CSStats] No SteamID'); return; }
+		if (!steamId) { console.warn('[CSStats] No SteamID'); div.remove(); return; }
 
 		if (!document.getElementById('csstats-extension-style')) {
 			const s = document.createElement('style');
@@ -38,14 +44,12 @@ function csstatsInjectMain() {
 			document.head?.appendChild(s);
 		}
 
-		const div = document.createElement('div');
-		div.className = 'account-row csstats-extension-container';
+		const profileUrl = 'https://csstats.gg/player/' + steamId;
 		const a = document.createElement('a');
-		a.href = 'https://csstats.gg/player/' + steamId;
+		a.href = openExternal ? 'steam://openurl_external/' + profileUrl : profileUrl;
 		a.className = 'csstats-btn';
 		a.innerHTML = 'CS<span class="stats">stats</span>.gg';
 		div.appendChild(a);
-		col.insertBefore(div, col.children[1] ?? null);
 	}
 
 	if (document.querySelector('.profile_rightcol')) {
@@ -62,4 +66,5 @@ function csstatsInjectMain() {
 	}
 }
 
-export const INJECTION_CODE = `(${csstatsInjectMain.toString()})()`;
+export const buildInjectionCode = (openExternal: boolean) =>
+	`(${csstatsInjectMain.toString()})(${openExternal === false ? 'false' : 'true'}, 'cdp')`;

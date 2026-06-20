@@ -24,13 +24,14 @@
   },
   "type": "module",
   "name": "csstats-extension",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles",
   "main": "./frontend/index.tsx",
   "author": "CSStats Extension Team",
   "license": "MIT",
   "dependencies": {
     "@steambrew/client": "^5.8.5",
+    "@steambrew/webkit": "^5.8.4",
     "react": "^19.2.7"
   }
 }

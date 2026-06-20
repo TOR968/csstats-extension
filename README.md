@@ -10,8 +10,11 @@ Before installing this plugin, ensure you have:
 
 ### Example
 
-![Example](./example.png)
-![ExampleGif](./example.gif)
+![Example](./assets/example.png)
+![ExampleGif](./assets/example.gif)
+
+### Millennium Library Manager
+![Example](./assets/settings.png)
 
 ---
 
