@@ -4,5 +4,6 @@
 	"common_name": "CSStats.gg Extension",
 	"description": "A Millennium plugin that adds CSStats.gg integration to Steam profiles.",
 	"version": "1.0.1",
-	"backendType": "lua"
+	"backendType": "lua",
+	"webkitApiVersion": "2.0.0"
 }

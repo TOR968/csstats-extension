@@ -6,7 +6,7 @@
 			"detail": "Build the plugin in development mode",
 			"type": "shell",
 			"group": "build",
-			"command": "pnpm run dev",
+			"command": "bun run dev",
 			"presentation": {
 				"echo": false,
 				"clear": true
@@ -18,7 +18,7 @@
 			"detail": "Build the plugin in production mode",
 			"type": "shell",
 			"group": "build",
-			"command": "pnpm run build",
+			"command": "bun run build",
 			"presentation": {
 				"echo": false,
 				"clear": true
