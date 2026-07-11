@@ -2,7 +2,7 @@
 
 A Millennium plugin that integrates CSStats.gg data and functionality directly into the Steam client, providing enhanced Counter-Strike statistics and profile information.
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before installing this plugin, ensure you have:
 
@@ -18,7 +18,7 @@ Before installing this plugin, ensure you have:
 
 ---
 
-## 🚀 Installation Guide
+## Installation Guide
 
 ### Method 1: Millennium Plugin Installer (Recommended)
 
@@ -46,24 +46,8 @@ cd csstats-extension
 
 #### Step 2: Install Dependencies
 
-**Install Node.js dependencies:**
-
 ```bash
-# Install pnpm if you haven't already
-npm install -g pnpm
-
-# Install project dependencies
-pnpm install
-```
-
-**Install Python dependencies:**
-
-```bash
-# Windows
-pip install -r requirements.txt
-
-# Linux/macOS
-pip3 install -r requirements.txt
+bun install
 ```
 
 #### Step 3: Build the Plugin
@@ -71,13 +55,13 @@ pip3 install -r requirements.txt
 **For development:**
 
 ```bash
-pnpm run dev
+bun run dev
 ```
 
 **For production:**
 
 ```bash
-pnpm run build
+bun run build
 ```
 
 #### Step 4: Install to Steam
@@ -115,7 +99,31 @@ ln -s "$(pwd)" ~/.local/share/millennium/plugins/csstats-extension
 
 ---
 
-## 🔗 Links
+## How it works
+
+The webkit bundle ([webkit/index.tsx](webkit/index.tsx)) runs inside the Steam community
+browser and injects the CSStats.gg button with a small vanilla-DOM function
+(`csstatsInjectMain` in [webkit/inject.ts](webkit/inject.ts)). Settings are stored by a
+small Lua backend ([backend/main.lua](backend/main.lua)) and edited from the plugin's
+settings panel in the Steam client.
+
+The backend resolves its own directory via Millennium's `utils` Lua module
+(`utils.get_backend_path()`) and reads/writes settings with `utils.read_file` /
+`utils.write_file`.
+
+> **Plugin Database review note:** The store review forbids CDP injection machinery,
+> raw `window.MILLENNIUM_API` access, and custom-styled settings UI (divs/buttons/badges).
+> The plugin uses webkit-only injection, imports everything from `@steambrew/client` /
+> `@steambrew/webkit`, and uses Steam native components (`ToggleField`) for the settings panel.
+
+## Type checking
+
+```bash
+npx tsc -p frontend/tsconfig.json --noEmit
+npx tsc -p webkit/tsconfig.json --noEmit
+```
+
+## Links
 
 -   [Millennium Framework](https://github.com/SteamClientHomebrew/Millennium)
 -   [CSStats.gg](https://csstats.gg)
