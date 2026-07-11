@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/TOR968/csstats-extension/compare/v1.1.1...v1.1.2) (2026-07-11)
+
+
+### Bug Fixes
+
+* address Plugin Database review feedback ([82cb4c0](https://github.com/TOR968/csstats-extension/commit/82cb4c0c9c8d373a5a236fa25a0926026bd2427b))
+
 ## [1.1.1](https://github.com/TOR968/csstats-extension/compare/v1.1.0...v1.1.1) (2026-06-20)
 
 
